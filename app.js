@@ -9,18 +9,31 @@ app.controller('MainCtrl', [
         $scope.test = 'Hello world!';
         // Data for the view
         $scope.posts = [
-            {title: 'post 1', upvotes: 5},
-            {title: 'post 2', upvotes: 2},
-            {title: 'post 3', upvotes: 15},
-            {title: 'post 4', upvotes: 9},
-            {title: 'post 5', upvotes: 4}
+            {title: 'post 1', votes: 5},
+            {title: 'post 2', votes: 2},
+            {title: 'post 3', votes: 15},
+            {title: 'post 4', votes: 9},
+            {title: 'post 5', votes: 4}
         ];
         // Functions to be implemented in the view
         $scope.addPost = function(){
         	if($scope.title && !($scope.title === '') ) { 
-            	$scope.posts.push({title: $scope.title, upvotes: 0});
+            	$scope.posts.push({
+            		title: $scope.title, 
+            		link: $scope.link,
+            		votes: 0
+            	});
             	$scope.title = '';
+            	$scope.link = '';
             }
         };
+        $scope.incVotes = function(post) {
+        	// Note that the page is immediately updated
+		 	post.votes += 1;
+		};
+		$scope.decVotes = function(post) {
+		 	post.votes -= 1;
+		};
+
 
 }]);

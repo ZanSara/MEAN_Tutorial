@@ -7,11 +7,25 @@
   <body ng-app="flapperNews" ng-controller="MainCtrl">
     <!-- ng-repeat="post in posts" : foreach loop -->
     <div ng-repeat="post in posts | orderBy: '-upvotes'">  <!-- orderBy: '-upvotes' : Angular Filter (https://docs.angularjs.org/api/ng/filter) -->
-        {{post.title}} - upvotes: {{post.upvotes}}
+        <!-- ng-show="post.link" : show if present -->
+        <a ng-show="post.link" href="{{post.link}}">
+    		{{post.title}}
+		</a>
+		<!-- ng-hide="post.link" : hide if present -->
+		<span ng-hide="post.link">
+			{{post.title}}
+		</span>
+		 - upvotes: {{post.votes}}
+        <!-- ng-click="incrementUpvotes(post)" : like onclick attribute, triggers on click -->
+        <span ng-click="incVotes(post)">^</span>
+        <span ng-click="decVotes(post)">v</span>
     </div>
     <!-- ng-submit="addPost()" : execute the function addPost() declared in $scope at submit -->
     <form ng-submit="addPost()">
 		<input type="text" ng-model="title"></input>
+		<br>
+		<input type="text" placeholder="Link" ng-model="link"></input>
+		<br>
 		<button type="submit">Post</button>
 	</form>
   </body>
