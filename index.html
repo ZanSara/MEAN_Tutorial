@@ -5,9 +5,15 @@
     <script src="app.js"></script>
   </head>
   <body ng-app="flapperNews" ng-controller="MainCtrl">
-    <div ng-repeat="post in posts">
-        {{post}}
+    <!-- ng-repeat="post in posts" : foreach loop -->
+    <div ng-repeat="post in posts | orderBy: '-upvotes'">  <!-- orderBy: '-upvotes' : Angular Filter (https://docs.angularjs.org/api/ng/filter) -->
+        {{post.title}} - upvotes: {{post.upvotes}}
     </div>
+    <!-- ng-submit="addPost()" : execute the function addPost() declared in $scope at submit -->
+    <form ng-submit="addPost()">
+		<input type="text" ng-model="title"></input>
+		<button type="submit">Post</button>
+	</form>
   </body>
 </html>
 
