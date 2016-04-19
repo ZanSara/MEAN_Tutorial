@@ -1,20 +1,25 @@
 var app = angular.module('flapperNews', []);
 
+// Post factory!!
+app.factory('posts', [function(){
+	var o = {
+		posts: []
+	};
+	return o;
+}]);
 
 app.controller('MainCtrl', [
     '$scope',   //  The $scope variable serves as the bridge between Angular controllers and Angular templates. 
                 //  If you want something to be accessible in the template such as a function or variable, bind it to $scope
-                
-    function($scope){
+    'posts',		// This is the post factory declared below which contains all posts data
+    function($scope, posts){
+		
+        // Scope data for the view
         $scope.test = 'Hello world!';
-        // Data for the view
-        $scope.posts = [
-            {title: 'post 1', votes: 5},
-            {title: 'post 2', votes: 2},
-            {title: 'post 3', votes: 15},
-            {title: 'post 4', votes: 9},
-            {title: 'post 5', votes: 4}
-        ];
+        
+        // Binds the factory to this scope!
+        $scope.posts = posts.posts; 
+        
         // Functions to be implemented in the view
         $scope.addPost = function(){
         	if($scope.title && !($scope.title === '') ) { 
@@ -34,6 +39,9 @@ app.controller('MainCtrl', [
 		$scope.decVotes = function(post) {
 		 	post.votes -= 1;
 		};
+		
+
+		
 
 
 }]);
